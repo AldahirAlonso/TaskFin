@@ -1,12 +1,13 @@
 services:
   postgres:
     image: 'postgres:latest'
+    restart: 'unless-stopped'
     environment:
       - 'POSTGRES_DB=taskfin'
       - 'POSTGRES_PASSWORD=bigotes'
       - 'POSTGRES_USER=aldahir'
     ports:
-      - '5432'
+      - '5432:5432'
     volumes:
       - pgdata:/data/postgres
 volumes:
