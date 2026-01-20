@@ -2,6 +2,8 @@ package com.TaskFin.controller;
 
 import com.TaskFin.persistence.crud.CrudTaskEntity;
 import com.TaskFin.persistence.entity.TaskEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +21,10 @@ public class TaskController {
         return (List<TaskEntity>) crudTaskEntity.findAll();
     }
 
-    @PostMapping
-    public String createTask() {
-        return "Task created";
+    @PostMapping("/tasks")
+    public ResponseEntity<TaskEntity> createTask(@RequestBody TaskEntity task) {
+        TaskEntity saved = crudTaskEntity.save(task);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
     @PutMapping
