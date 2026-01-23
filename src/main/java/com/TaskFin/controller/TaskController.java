@@ -1,5 +1,7 @@
 package com.TaskFin.controller;
 
+import com.TaskFin.domain.dto.TaskDto;
+import com.TaskFin.domain.service.TaskService;
 import com.TaskFin.persistence.crud.CrudTaskEntity;
 import com.TaskFin.persistence.entity.TaskEntity;
 import org.springframework.http.HttpStatus;
@@ -10,21 +12,20 @@ import java.util.List;
 
 @RestController
 public class TaskController {
-    private CrudTaskEntity crudTaskEntity;
+    private final TaskService taskService;
 
-    public TaskController(CrudTaskEntity crudTaskEntity) {
-        this.crudTaskEntity = crudTaskEntity;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     @GetMapping("/tasks")
-    public List<TaskEntity> getTasks() {
-        return (List<TaskEntity>) crudTaskEntity.findAll();
+    public List<TaskDto> getAll() {
+        return this.taskService.getAll();
     }
 
-    @PostMapping("/tasks")
-    public ResponseEntity<TaskEntity> createTask(@RequestBody TaskEntity task) {
-        TaskEntity saved = crudTaskEntity.save(task);
-        return new ResponseEntity<>(saved, HttpStatus.CREATED);
+    @PostMapping
+    public String createTask() {
+        return "Task created";
     }
 
     @PutMapping
