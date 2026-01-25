@@ -1,10 +1,12 @@
 package com.TaskFin.domain.dto;
 
+import com.TaskFin.domain.Status;
+
 public record TaskDto(
     Long id,
-    String title,
+    String name,
     String description,
-    Boolean completed,
+    Status status,
     String startDate,
     String endDate,
     String startTime,

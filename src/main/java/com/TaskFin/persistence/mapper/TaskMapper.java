@@ -7,11 +7,11 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {StatusMapper.class})
 public interface TaskMapper {
     @Mapping(source = "taskName", target = "name")
     @Mapping(source = "taskDescription", target = "description")
-    @Mapping(source = "taskStatus", target = "status")
+    @Mapping(source = "taskStatus", target = "status", qualifiedByName = "stringToStatus")
     @Mapping(source = "taskStartTime", target = "startTime")
     @Mapping(source = "taskEndTime", target = "endTime")
     @Mapping(source = "taskStartDate", target = "startDate")
