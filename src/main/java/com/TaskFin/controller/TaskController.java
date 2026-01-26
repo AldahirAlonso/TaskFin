@@ -2,9 +2,6 @@ package com.TaskFin.controller;
 
 import com.TaskFin.domain.dto.TaskDto;
 import com.TaskFin.domain.service.TaskService;
-import com.TaskFin.persistence.crud.CrudTaskEntity;
-import com.TaskFin.persistence.entity.TaskEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +15,19 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping("/tasks")
-    public List<TaskDto> getAll() {
-        return this.taskService.getAll();
+    @GetMapping
+    public ResponseEntity<List<TaskDto>> getAll() {
+        return ResponseEntity.ok(this.taskService.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TaskDto> getById(@PathVariable Long id) {
+        TaskDto taskDto = this.taskService.getById(id);
+
+        if (taskDto == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(taskDto);
     }
 
     @PostMapping
