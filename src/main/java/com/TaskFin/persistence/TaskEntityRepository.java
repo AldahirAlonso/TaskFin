@@ -30,4 +30,10 @@ public class TaskEntityRepository implements TaskRepository {
         TaskEntity taskEntity = this.crudTaskEntity.findById(id).orElse(null);
         return this.taskMapper.toDto(taskEntity);
     }
+
+    @Override
+    public TaskDto save(TaskDto taskDto) {
+        TaskEntity taskEntity = this.taskMapper.toEntity(taskDto);
+        return this.taskMapper.toDto(this.crudTaskEntity.save(taskEntity));
+    }
 }

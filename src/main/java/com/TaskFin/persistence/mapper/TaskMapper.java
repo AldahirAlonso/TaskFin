@@ -2,6 +2,7 @@ package com.TaskFin.persistence.mapper;
 
 import com.TaskFin.domain.dto.TaskDto;
 import com.TaskFin.persistence.entity.TaskEntity;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -18,4 +19,8 @@ public interface TaskMapper {
     @Mapping(source = "taskEndDate", target = "endDate")
     TaskDto toDto(TaskEntity entity);
     List<TaskDto> toDto(Iterable<TaskEntity> entities);
+
+    @InheritInverseConfiguration
+    @Mapping(source = "name", target = "taskName", qualifiedByName = "statusToString")
+    TaskEntity toEntity(TaskDto dto);
 }
