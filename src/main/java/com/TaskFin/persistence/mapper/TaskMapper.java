@@ -5,6 +5,7 @@ import com.TaskFin.persistence.entity.TaskEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
@@ -23,4 +24,12 @@ public interface TaskMapper {
     @InheritInverseConfiguration
     @Mapping(source = "name", target = "taskName", qualifiedByName = "statusToString")
     TaskEntity toEntity(TaskDto dto);
+
+    @Mapping(target = "taskName", source = "name")
+    @Mapping(target = "taskDescription", source = "description")
+    @Mapping(target = "taskStartTime", source = "startTime")
+    @Mapping(target = "taskEndTime", source = "endTime")
+    @Mapping(target = "taskStartDate", source = "startDate")
+    @Mapping(target = "taskEndDate", source = "endDate")
+    void updateEntityFromDto(TaskDto taskDto, @MappingTarget TaskEntity taskEntity);
 }

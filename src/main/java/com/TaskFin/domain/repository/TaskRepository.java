@@ -8,4 +8,5 @@ public interface TaskRepository {
     List<TaskDto> getAll();
     TaskDto getById(Long id);
     TaskDto save(TaskDto task);
+    TaskDto update(long id, TaskDto task);
 }

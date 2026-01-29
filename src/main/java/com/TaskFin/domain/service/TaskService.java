@@ -25,4 +25,8 @@ public class TaskService {
     public TaskDto add(TaskDto taskDto) {
         return this.taskRepository.save(taskDto);
     }
+
+    public TaskDto update(long id, TaskDto taskDto) {
+        return this.taskRepository.update(id, taskDto);
+    }
 }
