@@ -1,6 +1,7 @@
 package com.TaskFin.persistence;
 
 import com.TaskFin.domain.dto.TaskDto;
+import com.TaskFin.domain.exception.TaskAlreadyExistsException;
 import com.TaskFin.domain.repository.TaskRepository;
 import com.TaskFin.persistence.crud.CrudTaskEntity;
 import com.TaskFin.persistence.entity.TaskEntity;
@@ -33,6 +34,10 @@ public class TaskEntityRepository implements TaskRepository {
 
     @Override
     public TaskDto save(TaskDto taskDto) {
+        if (this.crudTaskEntity.findFirstByTaskName(taskDto.name()) != null) {
+            throw new TaskAlreadyExistsException(taskDto.name());
+        }
+
         TaskEntity taskEntity = this.taskMapper.toEntity(taskDto);
         return this.taskMapper.toDto(this.crudTaskEntity.save(taskEntity));
     }
