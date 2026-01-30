@@ -9,4 +9,5 @@ public interface TaskRepository {
     TaskDto getById(Long id);
     TaskDto save(TaskDto task);
     TaskDto update(long id, TaskDto task);
+    void delete(Long id);
 }

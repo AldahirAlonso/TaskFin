@@ -46,4 +46,9 @@ public class TaskEntityRepository implements TaskRepository {
         this.taskMapper.updateEntityFromDto(taskDto, taskEntity);
         return this.taskMapper.toDto(this.crudTaskEntity.save(taskEntity));
     }
+
+    @Override
+    public void delete(Long id) {
+        this.crudTaskEntity.deleteById(id);
+    }
 }

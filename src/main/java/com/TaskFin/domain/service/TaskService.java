@@ -29,4 +29,8 @@ public class TaskService {
     public TaskDto update(long id, TaskDto taskDto) {
         return this.taskRepository.update(id, taskDto);
     }
+
+    public void delete(long id) {
+        this.taskRepository.delete(id);
+    }
 }
