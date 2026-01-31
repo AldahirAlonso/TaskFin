@@ -2,6 +2,7 @@ package com.TaskFin.web.controller;
 
 import com.TaskFin.domain.dto.TaskDto;
 import com.TaskFin.domain.service.TaskService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +38,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TaskDto> update(@PathVariable Long id, @RequestBody TaskDto taskDto) {
+    public ResponseEntity<TaskDto> update(@PathVariable Long id, @RequestBody @Valid TaskDto taskDto) {
         return ResponseEntity.ok(this.taskService.update(id, taskDto));
     }
 
