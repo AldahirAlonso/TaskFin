@@ -22,7 +22,7 @@ public interface TaskMapper {
     List<TaskDto> toDto(Iterable<TaskEntity> entities);
 
     @InheritInverseConfiguration
-    @Mapping(source = "name", target = "taskName", qualifiedByName = "statusToString")
+    @Mapping(source = "status", target = "taskStatus", qualifiedByName = "statusToString")
     TaskEntity toEntity(TaskDto dto);
 
     @Mapping(target = "taskName", source = "name")
