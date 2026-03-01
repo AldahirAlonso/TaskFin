@@ -7,9 +7,14 @@ public class StatusMapper {
 
     @Named("stringToStatus")
     public static Status stringToStatus(String status) {
-        if (status == null) return null;
+        if (status == null)
+            return null;
 
         return switch (status.toUpperCase()) {
+            case "PENDIENTE" -> Status.PENDING;
+            case "EN PROGRESO" -> Status.IN_PROGRESS;
+            case "COMPLETADO" -> Status.COMPLETED;
+            case "CANCELADO" -> Status.CANCELLED;
             case "PENDING" -> Status.PENDING;
             case "IN_PROGRESS" -> Status.IN_PROGRESS;
             case "COMPLETED" -> Status.COMPLETED;
@@ -19,14 +24,16 @@ public class StatusMapper {
     }
 
     @Named("statusToString")
-    public static String statusToString (Status status) {
-        if (status == null) return null;
+    public static String statusToString(Status status) {
+        if (status == null)
+            return null;
 
         return switch (status) {
-            case PENDING -> "PENDING";
-            case IN_PROGRESS -> "IN_PROGRESS";
-            case COMPLETED -> "COMPLETED";
-            case CANCELLED -> "CANCELLED";
+            case PENDING -> "Pendiente";
+            case IN_PROGRESS -> "En Progreso";
+            case COMPLETED -> "Completado";
+            case CANCELLED -> "Cancelado";
+            default -> "Desconocido";
         };
     }
 }
